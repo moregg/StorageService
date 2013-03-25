@@ -42,4 +42,4 @@ gem 'json'
 gem 'rest-client'
 gem 'thin'
 
-gem "resque", "~> 2.0"
+gem  'resque'
