@@ -1,0 +1,19 @@
+
+
+Started GET "/photos/add" for 127.0.0.1 at 2013-03-25 16:29:50 +0800
+Connecting to database specified by database.yml
+Processing by PhotosController#add as HTML
+  [1m[36mPhoto Load (277.5ms)[0m  [1mSELECT `photos`.* FROM `photos` WHERE `photos`.`id` = 1 LIMIT 1[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 839ms (Views: 71.0ms | ActiveRecord: 583.1ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started POST "/photos/add" for 127.0.0.1 at 2013-03-25 16:49:54 +0800
+Connecting to database specified by database.yml
+Processing by PhotosController#add as XML
+  Parameters: {"photo"=>#<ActionDispatch::Http::UploadedFile:0x43ad240 @original_filename="1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo\"; filename=\"1.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:C:/Users/y/AppData/Local/Temp/RackMultipart20130325-7332-12vk34w>>, "description"=>"hello world"}
+WARNING: Can't verify CSRF token authenticity
+  Rendered text template (0.0ms)
+Completed 200 OK in 121ms (Views: 16.0ms | ActiveRecord: 38.5ms)
