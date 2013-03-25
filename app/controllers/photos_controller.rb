@@ -15,7 +15,7 @@ class PhotosController < ApplicationController
     end
 
     def test_resque
-      resque = Resque.new
-      resque << PhotoProcesserJob.new
+      id = params[:id]
+      Resque.enqueue(PhotoProcesserJob,id)
     end
 end
