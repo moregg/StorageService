@@ -10,12 +10,14 @@ class PhotosController < ApplicationController
 
         render :text => p.to_json
       rescue Exception => e
-        render :text => false
+        render :text => "false"
       end
     end
 
     def test_resque
       id = params[:id]
       Resque.enqueue(PhotoProcesserJob,id)
+
+      render :text => "success"
     end
 end
