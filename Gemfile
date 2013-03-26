@@ -40,7 +40,8 @@ gem 'jquery-rails'
 gem 'mysql2'
 gem 'json'
 gem 'rest-client'
-gem 'thin'
+
+gem 'unicorn'
 
 gem  'resque'
 
