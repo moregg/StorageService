@@ -19,10 +19,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="36" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
+            <state line="58" column="56" selection-start="856" selection-end="856" vertical-scroll-proportion="0.86049926">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile.lock" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gemfile.lock">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="47" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -41,15 +50,6 @@
         <entry file="file://$PROJECT_DIR$/app/models/service_test.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="24" column="31" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="database.yml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/database.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="13" selection-start="691" selection-end="691" vertical-scroll-proportion="0.66519827">
               <folding />
             </state>
           </provider>
@@ -128,11 +128,11 @@
         <option value="$PROJECT_DIR$/app/models/test.rb" />
         <option value="$PROJECT_DIR$/Rakefile" />
         <option value="$PROJECT_DIR$/app/models/photo_processer_job.rb" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/views/photos/add.json.jbuilder" />
         <option value="$PROJECT_DIR$/app/controllers/photos_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/service_test.rb" />
         <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
@@ -542,13 +542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="36" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/photos/add.json.jbuilder">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="26" selection-start="102" selection-end="102" vertical-scroll-proportion="0.0">
@@ -598,9 +591,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
+    <entry file="file://$PROJECT_DIR$/Gemfile.lock">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="13" selection-start="691" selection-end="691" vertical-scroll-proportion="0.66519827">
+        <state line="10" column="47" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="56" selection-start="856" selection-end="856" vertical-scroll-proportion="0.86049926">
           <folding />
         </state>
       </provider>
