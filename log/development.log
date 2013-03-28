@@ -17,3 +17,41 @@ Processing by PhotosController#add as XML
 WARNING: Can't verify CSRF token authenticity
   Rendered text template (0.0ms)
 Completed 200 OK in 121ms (Views: 16.0ms | ActiveRecord: 38.5ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started POST "/photos/add" for 127.0.0.1 at 2013-03-28 15:46:33 +0800
+Connecting to database specified by database.yml
+Processing by PhotosController#add as XML
+  Parameters: {"photo"=>#<ActionDispatch::Http::UploadedFile:0x3c7a970 @original_filename="1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo\"; filename=\"1.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:C:/Users/y/AppData/Local/Temp/RackMultipart20130328-7312-10q7nea>>, "description"=>"hello world"}
+WARNING: Can't verify CSRF token authenticity
+  Rendered photos/add.json.jbuilder (0.0ms)
+Completed 200 OK in 5265ms (Views: 109.0ms | ActiveRecord: 58.0ms)
+
+
+Started POST "/photos/add" for 127.0.0.1 at 2013-03-28 15:47:37 +0800
+Connecting to database specified by database.yml
+Processing by PhotosController#add as XML
+  Parameters: {"photo"=>#<ActionDispatch::Http::UploadedFile:0x585a9c8 @original_filename="1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo\"; filename=\"1.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:C:/Users/y/AppData/Local/Temp/RackMultipart20130328-3820-zlbndr>>, "description"=>"hello world"}
+WARNING: Can't verify CSRF token authenticity
+  Rendered photos/add.json.jbuilder (0.0ms)
+Completed 200 OK in 756ms (Views: 19.0ms | ActiveRecord: 673.0ms)
+
+
+Started POST "/photos/add" for 127.0.0.1 at 2013-03-28 15:48:04 +0800
+Processing by PhotosController#add as XML
+  Parameters: {"photo"=>#<ActionDispatch::Http::UploadedFile:0x2959548 @original_filename="1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo\"; filename=\"1.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:C:/Users/y/AppData/Local/Temp/RackMultipart20130328-3820-ix4yyk>>}
+WARNING: Can't verify CSRF token authenticity
+  Rendered photos/add.json.jbuilder (0.0ms)
+Completed 200 OK in 14ms (Views: 12.0ms | ActiveRecord: 0.0ms)
+Connecting to database specified by database.yml
+
+
+Started POST "/photos/add" for 127.0.0.1 at 2013-03-28 15:50:48 +0800
+Connecting to database specified by database.yml
+Processing by PhotosController#add as XML
+  Parameters: {"photo"=>#<ActionDispatch::Http::UploadedFile:0x5740620 @original_filename="1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo\"; filename=\"1.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:C:/Users/y/AppData/Local/Temp/RackMultipart20130328-8628-rvmlut>>, "description"=>"hello world"}
+WARNING: Can't verify CSRF token authenticity
+  Rendered photos/add.json.jbuilder (0.0ms)
+Completed 200 OK in 629ms (Views: 19.0ms | ActiveRecord: 542.0ms)
