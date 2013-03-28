@@ -41,18 +41,8 @@ gem 'mysql2'
 gem 'json'
 gem 'rest-client'
 
-
-
-
-
-
-
-
-
-
-
-
-
 gem 'jbuilder'
 gem  'resque'
+
+gem 'thin'
 
