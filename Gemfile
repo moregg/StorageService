@@ -42,4 +42,5 @@ gem 'json'
 gem 'rest-client'
 gem 'thin'
 
+gem 'jbuilder'
 gem  'resque'

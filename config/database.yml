@@ -7,12 +7,12 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: storage_service
+  database: elbrus_development
   pool: 5
   username: vidaprint
-  password:  huxia001
+  password: vida_huxia001@
   host: 42.121.111.102
-
+  port: 55407
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
@@ -26,8 +26,9 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: storage_service
+  database: elbrus_development
   pool: 5
   username: vidaprint
-  password:  huxia001
+  password: vida_huxia001@
   host: 42.121.111.102
+  port: 55407

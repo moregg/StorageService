@@ -1,23 +1,29 @@
 class PhotosController < ApplicationController
-    def add
-      begin
-        photo = params[:photo]
-        p = Photo.new(:description => params[:description])
+  def add
+    begin
+      photo = params[:photo]
+      filter_info = params[:filter_info]
+      p = Photo.new(:description => params[:description])
 
-        File.open("public/" + params[:photo].original_filename, "wb+") do |f|
-          f.write(params[:photo].read)
-        end
-
-        render :text => p.to_json
-      rescue Exception => e
-        render :text => "false"
+      File.open("public/" + p.id.to_s + ".jpg", "wb+") do |f|
+        f.write(params[:photo].read)
       end
-    end
 
-    def test_resque
-      id = params[:id]
-      Resque.enqueue(PhotoProcesserJob,id)
+      #Resque.enqueue(PhotoProcesserJob, p.id)
 
-      render :text => "success"
+      @success = true
+      @photo_id = p.id
+    rescue Exception => e
+      @success = false
+      @error_msg = e.message
     end
+  end
+
+
+  def test_resque
+    id = params[:id]
+    Resque.enqueue(PhotoProcesserJob, id)
+
+    render :text => "success"
+  end
 end
