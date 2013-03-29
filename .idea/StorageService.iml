@@ -28,7 +28,9 @@
     <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v3.2.2, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script (v2.2.0, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.4.0, ruby-1.9.3-p327) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="daemons (v1.1.9, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, ruby-1.9.3-p327) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="eventmachine (v1.0.0, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v1.4.0, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.1, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.1, ruby-1.9.3-p327) [gem]" level="application" />
@@ -59,6 +61,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v3.2.5, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sinatra (v1.3.6, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.2.2, ruby-1.9.3-p327) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="thin (v1.5.0, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.16.0, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.3.3, ruby-1.9.3-p327) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.12, ruby-1.9.3-p327) [gem]" level="application" />

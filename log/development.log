@@ -55,3 +55,17 @@ Processing by PhotosController#add as XML
 WARNING: Can't verify CSRF token authenticity
   Rendered photos/add.json.jbuilder (0.0ms)
 Completed 200 OK in 629ms (Views: 19.0ms | ActiveRecord: 542.0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started POST "/photos/add" for 127.0.0.1 at 2013-03-29 13:40:39 +0800
+Connecting to database specified by database.yml
+Processing by PhotosController#add as XML
+  Parameters: {"photo"=>#<ActionDispatch::Http::UploadedFile:0x4c47e70 @original_filename="1.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"photo\"; filename=\"1.png\"\r\nContent-Type: image/png\r\n", @tempfile=#<File:C:/Users/y/AppData/Local/Temp/RackMultipart20130329-8196-11hzpst>>, "description"=>"hello world"}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36m (10.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (14.0ms)[0m  INSERT INTO `photos` (`content_type`, `created_at`, `del_flg`, `description`, `filename`, `height`, `isvalid`, `md5`, `orig_filename`, `parent_id`, `partition`, `photoable_id`, `photoable_type`, `size`, `thumbnail`, `updated_at`, `upload_filename`, `user_id`, `validated`, `width`) VALUES (NULL, '2013-03-29 05:40:40', 0, 'hello world', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2013-03-29 05:40:40', NULL, NULL, 0, NULL)
+  [1m[36m (25.0ms)[0m  [1mCOMMIT[0m
+  Rendered photos/add.json.jbuilder (0.0ms)
+Completed 200 OK in 220ms (Views: 56.0ms | ActiveRecord: 87.0ms)
