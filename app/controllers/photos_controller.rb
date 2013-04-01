@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
         f.write(params[:photo].read)
       end
 
-      #Resque.enqueue(PhotoProcesserJob, p.id)
+      Resque.enqueue(PhotoProcesserJob, p.id)
 
       @success = true
       @photo_id = p.id
