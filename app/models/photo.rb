@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Photo < ActiveRecord::Base
   attr_accessible :photoable_id, :photoable_type, :parent_id, :user_id
   attr_accessible :size, :width, :height, :content_type
@@ -8,11 +9,11 @@ class Photo < ActiveRecord::Base
 
 
   def Photo.is_afu?(filter_info)
-    #filter_info.force_encoding('utf-8') == "Activity/阿芙" rescue false
+    filter_info.force_encoding('utf-8') == "Activity/阿芙" rescue false
   end
 
   def Photo.is_pm25?(filter_info)
-    #filter_info.force_encoding('utf-8') == "Activity/PM2.5" rescue false
+    filter_info.force_encoding('utf-8') == "Activity/PM2.5" rescue false
   end
 
   def Photo.generate_thunail(photo_id)

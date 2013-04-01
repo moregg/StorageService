@@ -6,7 +6,6 @@ class PhotosController < ApplicationController
 
       p = Photo.new(:description => params[:description])
       p.save
-
       p.filename = p.id.to_s
       p.save
 
