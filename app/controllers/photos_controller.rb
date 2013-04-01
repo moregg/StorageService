@@ -3,10 +3,11 @@ class PhotosController < ApplicationController
     begin
       photo = params[:photo]
       filter_info = params[:filter_info]
+
       p = Photo.new(:description => params[:description])
       p.save
 
-      File.open("public/" + p.id.to_s + ".jpg", "wb+") do |f|
+      File.open("public/" + p.id.to_s, "wb+") do |f|
         f.write(params[:photo].read)
       end
 
