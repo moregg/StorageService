@@ -7,6 +7,9 @@ class PhotosController < ApplicationController
       p = Photo.new(:description => params[:description])
       p.save
 
+      p.filename = p.id.to_s
+      p.save
+
       File.open("public/" + p.id.to_s, "wb+") do |f|
         f.write(params[:photo].read)
       end

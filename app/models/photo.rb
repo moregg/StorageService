@@ -22,13 +22,13 @@ class Photo < ActiveRecord::Base
     photo_file_name_s = " public/" + photo_id.to_s + "_s"
 
     `convert -resize 640x640 #{photo_file_name} #{photo_file_name_l}`
-    Photo.create({:width => 640, :height => 640, :thumbnail => "l", :filename => photo_file_name_l})
+    Photo.create({:parent_id => photo_id, :width => 640, :height => 640, :thumbnail => "l", :filename => photo_id.to_s + "_l"})
 
     `convert -resize 640x640 #{photo_file_name} #{photo_file_name_m}`
-    Photo.create({:width => 640, :height => 640, :thumbnail => "m", :filename => photo_file_name_m})
+    Photo.create({:parent_id => photo_id, :width => 640, :height => 640, :thumbnail => "m", :filename => photo_id.to_s + "_m"})
 
     `convert -resize 150x150 #{photo_file_name} #{photo_file_name_s}`
-    Photo.create({:width => 150, :height => 150, :thumbnail => "s", :filename => photo_file_name_s})
+    Photo.create({:parent_id => photo_id, :width => 150, :height => 150, :thumbnail => "s", :filename => photo_id.to_s + "_s"})
 
   end
 
