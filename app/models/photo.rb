@@ -7,7 +7,6 @@ class Photo < ActiveRecord::Base
   attr_accessible :md5, :description, :partition
   # To change this template use File | Settings | File Templates.
 
-
   def Photo.is_afu?(filter_info)
     filter_info.force_encoding('utf-8') == "Activity/阿芙" rescue false
   end
@@ -30,7 +29,6 @@ class Photo < ActiveRecord::Base
 
     `convert -resize 150x150 #{photo_file_name} #{photo_file_name_s}`
     Photo.create({:parent_id => photo_id, :width => 150, :height => 150, :thumbnail => "s", :filename => photo_id.to_s + "_s"})
-
   end
 
   def Photo.add_afu(photo_id)
@@ -58,6 +56,34 @@ class Photo < ActiveRecord::Base
       c.draw "image SrcOver 0,0 80,54 'public/#{f}_s.png'"
     end
     s.write photo_file_name_s
+  end
+
+  def Photo.write_to_mogile_fs(photo_id)
+    photo_file_name_l = "public/" + photo_id.to_s + "_l"
+    photo_file_name_m = "public/" + photo_id.to_s + "_m"
+    photo_file_name_s = "public/" + photo_id.to_s + "_s"
+  end
+
+  def Photo.query_to_json(id)
+    result = {}
+    begin
+      p = Photo.find(id)
+      result.merge!({:origin => {:photo_id => id, :description => p.description}})
+
+      Photo.where("parent_id = ? ", id).each do |p|
+        if p.thumbnail == "l"
+           result.merge!({:l => {:width => p.width, :height => p.height, :filename => p.filename}})
+        elsif p.thumbnail == "m"
+           result.merge!({:m => {:width => p.width, :height => p.height, :filename => p.filename}})
+        elsif p.thumbnail == "s"
+           result.merge!({:s => {:width => p.width, :height => p.height, :filename => p.filename}})
+        end
+      end
+    rescue ActiveRecord::RecordNotFound
+      return nil
+    end
+
+    return result
   end
 
 end

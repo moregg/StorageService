@@ -23,6 +23,13 @@ class PhotosController < ApplicationController
     end
   end
 
+  def query
+    photo_ids = params[:ids]
+    @photos = []
+    photo_ids.each do |photo_id|
+      @photos.push(Photo.query_to_json(photo_id))
+    end
+  end
 
   def test_resque
     id = params[:id]
