@@ -8,11 +8,11 @@ class Photo < ActiveRecord::Base
 
 
   def Photo.is_afu?(filter_info)
-    filter_info.force_encoding('utf-8') == "Activity/阿芙" rescue false
+    #filter_info.force_encoding('utf-8') == "Activity/阿芙" rescue false
   end
 
   def Photo.is_pm25?(filter_info)
-    filter_info.force_encoding('utf-8') == "Activity/PM2.5" rescue false
+    #filter_info.force_encoding('utf-8') == "Activity/PM2.5" rescue false
   end
 
   def Photo.generate_thunail(photo_id)
