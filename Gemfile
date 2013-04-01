@@ -47,3 +47,4 @@ gem  'resque'
 gem  'eventmachine'
 gem 'thin'
 
+gem 'log4r'
