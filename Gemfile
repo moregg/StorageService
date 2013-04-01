@@ -48,3 +48,4 @@ gem  'eventmachine'
 gem 'thin'
 
 gem 'log4r'
+gem 'rb-readline'
