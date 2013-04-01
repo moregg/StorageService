@@ -44,5 +44,6 @@ gem 'rest-client'
 gem 'jbuilder'
 gem  'resque'
 
+gem  'eventmachine'
 gem 'thin'
 

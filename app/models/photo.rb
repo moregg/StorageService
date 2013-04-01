@@ -5,4 +5,50 @@ class Photo < ActiveRecord::Base
   attr_accessible :validated, :isvalid, :del_flg
   attr_accessible :md5, :description, :partition
   # To change this template use File | Settings | File Templates.
+
+
+  def Photo.is_afu?(filter_info)
+    filter_info.force_encoding('utf-8') == "Activity/阿芙" rescue false
+  end
+
+  def Photo.is_pm25?(filter_info)
+    filter_info.force_encoding('utf-8') == "Activity/PM2.5" rescue false
+  end
+
+  def Photo.generate_thunail(photo_id)
+    photo_file_name = "public/" + photo_id.to_s
+    photo_file_name_l = " public/" + photo_id.to_s + " _l "
+    photo_file_name_m = " public/" + photo_id.to_s + " _m "
+    photo_file_name_s = " public/" + photo_id.to_s + " _s "
+
+    `convert -resize 640x640 #{photo_file_name} #{photo_file_name_l}`
+    `convert -resize 640x640 #{photo_file_name} #{photo_file_name_m}`
+    `convert -resize 150x150 #{photo_file_name} #{photo_file_name_s}`
+  end
+
+  def Photo.add_afu
+=begin
+
+    str = ["trd", "zrm"]
+    f = str.shuffle[0]
+
+    l = MiniMagick::Image.open("#{PICS_PATH}/#{partitioned_filename}_l")
+    l.combine_options do |c|
+      c.draw "image SrcOver 0,0 310,210 '/home/vidafm/#{f}_l.png'"
+    end
+    l.write "#{PICS_PATH}/#{partitioned_filename}_l"
+
+    m = MiniMagick::Image.open("#{PICS_PATH}/#{partitioned_filename}_m")
+    m.combine_options do |c|
+      c.draw "image SrcOver 0,0 310,210 '/home/vidafm/#{f}_l.png'"
+    end
+    m.write "#{PICS_PATH}/#{partitioned_filename}_m"
+
+    s = MiniMagick::Image.open("#{PICS_PATH}/#{partitioned_filename}_s")
+    s.combine_options do |c|
+      c.draw "image SrcOver 0,0 80,54 '/home/vidafm/#{f}_s.png'"
+    end
+    s.write "#{PICS_PATH}/#{partitioned_filename}_s"
+=end
+  end
 end
