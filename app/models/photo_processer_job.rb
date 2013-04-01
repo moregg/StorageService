@@ -10,6 +10,7 @@ class PhotoProcesserJob
 
       if Photo.is_afu?(filter_info)
         PhotoProcesserLog.log("begin processing afu...")
+        Photo.add_afu(photo_id)
       end
     rescue Exception=>e
       PhotoProcesserLog.log(e.message)

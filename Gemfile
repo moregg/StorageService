@@ -49,3 +49,4 @@ gem 'thin'
 
 gem 'log4r'
 gem 'rb-readline'
+gem 'mini_magick', git: "git://github.com/Prajna/mini_magick.git"

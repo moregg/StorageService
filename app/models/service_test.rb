@@ -1,3 +1,4 @@
+# coding: utf-8
 class ServiceTest
   def ServiceTest.photo_add_1
     begin

@@ -33,29 +33,31 @@ class Photo < ActiveRecord::Base
 
   end
 
-  def Photo.add_afu
-=begin
-
+  def Photo.add_afu(photo_id)
     str = ["trd", "zrm"]
     f = str.shuffle[0]
 
-    l = MiniMagick::Image.open("#{PICS_PATH}/#{partitioned_filename}_l")
+    photo_file_name_l = " public/" + photo_id.to_s + "_l"
+    photo_file_name_m = " public/" + photo_id.to_s + "_m"
+    photo_file_name_s = " public/" + photo_id.to_s + "_s"
+
+    l = MiniMagick::Image.open(photo_file_name_l)
     l.combine_options do |c|
-      c.draw "image SrcOver 0,0 310,210 '/home/vidafm/#{f}_l.png'"
+      c.draw "image SrcOver 0,0 310,210 'public/#{f}_l.png'"
     end
-    l.write "#{PICS_PATH}/#{partitioned_filename}_l"
+    l.write photo_file_name_l
 
-    m = MiniMagick::Image.open("#{PICS_PATH}/#{partitioned_filename}_m")
+    m = MiniMagick::Image.open(photo_file_name_m)
     m.combine_options do |c|
-      c.draw "image SrcOver 0,0 310,210 '/home/vidafm/#{f}_l.png'"
+      c.draw "image SrcOver 0,0 310,210 'public/#{f}_l.png'"
     end
-    m.write "#{PICS_PATH}/#{partitioned_filename}_m"
+    m.write photo_file_name_m
 
-    s = MiniMagick::Image.open("#{PICS_PATH}/#{partitioned_filename}_s")
+    s = MiniMagick::Image.open(photo_file_name_s)
     s.combine_options do |c|
-      c.draw "image SrcOver 0,0 80,54 '/home/vidafm/#{f}_s.png'"
+      c.draw "image SrcOver 0,0 80,54 'public/#{f}_s.png'"
     end
-    s.write "#{PICS_PATH}/#{partitioned_filename}_s"
-=end
+    s.write photo_file_name_s
   end
+
 end
