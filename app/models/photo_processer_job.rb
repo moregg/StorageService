@@ -7,14 +7,12 @@ class PhotoProcesserJob
 
     begin
       Photo.generate_thunail(photo_id)
-
       if Photo.is_afu?(filter_info)
         ProcesserLog.log("begin processing afu...")
         Photo.add_afu(photo_id)
       end
     rescue Exception=>e
       ProcesserLog.log(e.message)
-    end                                                                                                                                             .
+    end
   end
-
 end
