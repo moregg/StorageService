@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
 
       (photo_file_name, photo_file_name_l,photo_file_name_m,photo_file_name_s) = Photo.make_temp_file_name(p.id)
       File.open(photo_file_name, "wb+") do |f|
-        f.write(params[:photo].read)
+        f.write(photo.read)
       end
 
       Resque.enqueue(PhotoProcesserJob, p.id, filter_info)

@@ -58,4 +58,16 @@ class Video  < ActiveRecord::Base
     #File::put_to_fs(File.open("#{TEMP_PATH}/#{self.dest_filename}_s.jpg", "r"), "#{self.partitioned_filename}_s.jpg", MOGILEFS_CLASS_VIDEOS)
   end
 
+
+  def Video.query_to_json(id)
+    result = {}
+    begin
+      v = Video.find(id)
+      result.merge!({:video_id => id, :description => v.description, :width => v.width, :height => v.height})
+    rescue ActiveRecord::RecordNotFound
+      return nil
+    end
+
+    return result
+  end
 end

@@ -7,7 +7,7 @@ class VideosController < ApplicationController
 
       (video_file_name,file_name_l,file_name_m,file_name_s) = Video.make_temp_file_name(v.id)
       File.open(video_file_name, "wb+") do |f|
-        f.write(params[:video].read)
+        f.write(video.read)
       end
 
       Resque.enqueue(VideoProcesserJob,v.id)
@@ -20,5 +20,11 @@ class VideosController < ApplicationController
     end
   end
 
-
+  def query
+    video_ids = params[:ids]
+    @videos = []
+    video_ids.each do |video_id|
+      @videos.push(Video.query_to_json(video_id))
+    end
+  end
 end
