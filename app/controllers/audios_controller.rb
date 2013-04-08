@@ -20,5 +20,14 @@ class AudiosController < ApplicationController
       @error_msg = e.message
     end
   end
+
+  def query
+    audios_ids = params[:ids]
+    @audios = []
+    audios_ids.each do |audio_id|
+      @audios.push(Audio.query_to_json(audio_id))
+    end
+  end
+
 end
 

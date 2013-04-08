@@ -73,4 +73,16 @@ class ServiceTest
     end
   end
 
+  def ServiceTest.audio_query
+    begin
+      response = RestClient.post "42.121.111.102/audios/query", :ids => [2, 3000]
+      # response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
+      #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb')
+      puts response
+    rescue Exception => e
+      puts "======" + e.message
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    end
+  end
+
 end

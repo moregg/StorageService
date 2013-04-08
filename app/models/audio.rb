@@ -11,7 +11,19 @@ class Audio < ActiveRecord::Base
     return audio_file_name
   end
 
-  def wirte_to_mogile_fs
+  def write_to_mogile_fs
 
+  end
+
+  def Audio.query_to_json(id)
+    result = {}
+    begin
+      a = Audio.find(id)
+      result.merge!({:audio_id => id, :duration => a.duration})
+    rescue ActiveRecord::RecordNotFound
+      return nil
+    end
+
+    return result
   end
 end
