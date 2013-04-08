@@ -9,7 +9,9 @@ class PhotosController < ApplicationController
       p.filename = p.id.to_s
       p.save
 
-      File.open("public/" + p.id.to_s, "wb+") do |f|
+      (photo_file_name, photo_file_name_l,photo_file_name_m,photo_file_name_s) = Photo.make_temp_file_name(p.id)
+
+      File.open(photo_file_name, "wb+") do |f|
         f.write(params[:photo].read)
       end
 
@@ -30,6 +32,7 @@ class PhotosController < ApplicationController
       @photos.push(Photo.query_to_json(photo_id))
     end
   end
+
 
   def test_resque
     id = params[:id]
