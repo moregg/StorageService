@@ -1,4 +1,6 @@
 class AudioProcesserJob
+  @queue = :audio_processer
+
   def self.perform(audio_id)
     ProcesserLog.log("begin processing audio.........#{audio_id}")
 

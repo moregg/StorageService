@@ -63,7 +63,7 @@ class ServiceTest
 
   def ServiceTest.audio_add_1
     begin
-      response = RestClient.post "42.121.111.102/audios/add", :audio => File.new('1.jpg', 'rb'), :audio_duration => 20
+      response = RestClient.post "42.121.111.102/audios/add", :audio => File.new('1.png', 'rb'), :audio_duration => 20
       #response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       puts response
