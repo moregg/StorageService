@@ -70,6 +70,7 @@ class Photo < ActiveRecord::Base
 
   def Photo.write_to_mogile_fs(photo_id)
     (photo_file_name,photo_file_name_l,photo_file_name_m,photo_file_name_s) = Photo.make_temp_file_name(photo_id)
+     MogileFsUtil.put_to_fs(photo_file_name, photo_file_name, MOGILEFS_CLASS_PICS)
   end
 
   def Photo.query_to_json(id)

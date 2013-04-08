@@ -2,7 +2,8 @@ class Audio < ActiveRecord::Base
   attr_accessible :duration
 
   def Audio.make_temp_file_name(audio_id)
-    audio_path = File.join(Rails.root, 'public/audios')
+    date = Date.today
+    audio_path = Rails.root.to_s + "/public/audios/" +  date.year.to_s + "_" + date.month.to_s + "_" + date.day.to_s
     if !FileTest.exists?(audio_path)
       FileUtils.mkdir(audio_path)
     end

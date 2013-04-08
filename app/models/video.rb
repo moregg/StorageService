@@ -3,9 +3,10 @@ class Video  < ActiveRecord::Base
   attr_accessible :transcoded, :isvalid
 
   def Video.make_temp_file_name(video_id)
-    video_path = File.join(Rails.root, 'public/videos')
+    date = Date.today
+    video_path = Rails.root.to_s + "/public/videos/" +  date.year.to_s + "_" + date.month.to_s + "_" + date.day.to_s
     if !FileTest.exists?(video_path)
-      FileUtils.mkdir(video_path)
+      FileUtils.mkdir_p(video_path)
     end
 
     video_file_name = video_path  + "/" + video_id.to_s
