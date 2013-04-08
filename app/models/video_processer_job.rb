@@ -5,11 +5,13 @@ class VideoProcesserJob
     VideoProcesserLog.log("begin processing video......#{video_id}")
 
     begin
-      puts "xxx"
+      v = Video.find(video_id)
+      v.generate_thumb
+      v.get_size
+      v.write_to_mogile_fs
     rescue Exception => e
       VideoProcesserLog.log(e.message)
     end
   end
-
 
 end

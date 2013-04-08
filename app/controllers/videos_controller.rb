@@ -5,7 +5,8 @@ class VideosController < ApplicationController
       v = Video.new(:description => params[:description])
       v.save
 
-      File.open("public/" + v.id.to_s, "wb+") do |f|
+      (video_file_name,file_name_l,file_name_m,file_name_s) = Video.make_temp_file_name(v.id)
+      File.open(video_file_name, "wb+") do |f|
         f.write(params[:video].read)
       end
 
