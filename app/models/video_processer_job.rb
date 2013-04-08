@@ -5,11 +5,11 @@ class VideoProcesserJob
     VideoProcesserLog.log("begin processing video......#{video_id}")
 
     begin
-
-    rescue Exception=>e
+      puts "xxx"
+    rescue Exception => e
       VideoProcesserLog.log(e.message)
-    end                                                                                                                                             .
-
+    end
   end
+
 
 end
