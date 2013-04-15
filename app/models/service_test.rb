@@ -2,7 +2,8 @@
 class ServiceTest
   def ServiceTest.photo_add_1
     begin
-      response = RestClient.post "42.121.111.102/photos/add", :photo => File.new('3.jpg', 'rb'), :description => "hello world", :filter_info => "Activity/阿芙"
+      #response = RestClient.post "42.121.111.102/photos/add", :photo => File.new('3.jpg', 'rb'), :description => "hello world", :filter_info => "Activity/阿芙"
+      response = RestClient.post "192.168.10.236:3000/photos/add", :photo => File.new('3.jpg', 'rb'), :description => "hello world", :filter_info => "Activity/阿芙"
       #response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       puts response
@@ -38,7 +39,8 @@ class ServiceTest
 
   def ServiceTest.video_add_1
     begin
-      response = RestClient.post "42.121.111.102/videos/add", :video => File.new('1.mp4', 'rb'), :description => "video xxx"
+      #response = RestClient.post "42.121.111.102/videos/add", :video => File.new('1.mp4', 'rb'), :description => "video xxx"
+      response = RestClient.post "192.168.10.236:3000/videos/add", :video => File.new('1.mp4', 'rb'), :description => "video xxx"
       #response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       puts response
@@ -63,7 +65,8 @@ class ServiceTest
 
   def ServiceTest.audio_add_1
     begin
-      response = RestClient.post "42.121.111.102/audios/add", :audio => File.new('1.png', 'rb'), :audio_duration => 20
+      #response = RestClient.post "42.121.111.102/audios/add", :audio => File.new('1.png', 'rb'), :audio_duration => 20
+      response = RestClient.post "192.168.10.236:3000/audios/add", :audio => File.new('1.png', 'rb'), :audio_duration => 20
       #response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       puts response
