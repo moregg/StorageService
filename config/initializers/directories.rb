@@ -19,3 +19,8 @@ MOGILEFS_CLASS_UPLOAD_PICS = "upload_pics"
 MOGILEFS_CLASS_UPLOAD_AUDIOS = "upload_audios"
 
 MOGILEFS_CLASS_UPLOAD_VIDEOS = "upload_videos"
+
+
+
+
+PICS_PATH_WEB = "http://pics.vida.fm"

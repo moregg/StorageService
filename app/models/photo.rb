@@ -34,13 +34,13 @@ class Photo < ActiveRecord::Base
     (photo_file_name,photo_file_name_l,photo_file_name_m,photo_file_name_s) = Photo.make_temp_file_name(photo_id)
 
     `convert -resize 640x640 #{photo_file_name} #{photo_file_name_l}`
-    Photo.create({:parent_id => photo_id, :width => 640, :height => 640, :thumbnail => "l", :filename => photo_file_name_l})
+    Photo.create({:parent_id => photo_id, :width => 640, :height => 640, :thumbnail => "l", :filename => photo_id.to_s+"_l"})
 
     `convert -resize 640x640 #{photo_file_name} #{photo_file_name_m}`
-    Photo.create({:parent_id => photo_id, :width => 640, :height => 640, :thumbnail => "m", :filename => photo_file_name_m})
+    Photo.create({:parent_id => photo_id, :width => 640, :height => 640, :thumbnail => "m", :filename => photo_id.to_s+"_m"})
 
     `convert -resize 150x150 #{photo_file_name} #{photo_file_name_s}`
-    Photo.create({:parent_id => photo_id, :width => 150, :height => 150, :thumbnail => "s", :filename => photo_file_name_s})
+    Photo.create({:parent_id => photo_id, :width => 150, :height => 150, :thumbnail => "s", :filename => photo_id.to_s+"_s"})
   end
 
   def Photo.add_afu(photo_id)
@@ -76,6 +76,14 @@ class Photo < ActiveRecord::Base
      MogileFsUtil.put_to_fs(photo_file_name_s, photo_id.to_s+"_s", MOGILEFS_CLASS_PICS)
   end
 
+  def partition_file_name
+    if partition.blank?
+      return filename
+    else
+      return partition + "/" + filename
+    end
+  end
+
   def Photo.query_to_json(id)
     result = {}
     begin
@@ -84,11 +92,11 @@ class Photo < ActiveRecord::Base
 
       Photo.where("parent_id = ? ", id).each do |p|
         if p.thumbnail == "l"
-           result.merge!({:l => {:width => p.width, :height => p.height, :filename => p.filename}})
+           result.merge!({:l => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name }})
         elsif p.thumbnail == "m"
-           result.merge!({:m => {:width => p.width, :height => p.height, :filename => p.filename}})
+           result.merge!({:m => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
         elsif p.thumbnail == "s"
-           result.merge!({:s => {:width => p.width, :height => p.height, :filename => p.filename}})
+           result.merge!({:s => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
         end
       end
     rescue ActiveRecord::RecordNotFound
