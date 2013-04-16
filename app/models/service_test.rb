@@ -27,7 +27,7 @@ class ServiceTest
 
   def ServiceTest.photo_query
     begin
-      response = RestClient.post "192.168.10.236:3000/photos/query", :ids => [1, 100]
+      response = RestClient.post "192.168.10.236:3000/photos/query", :ids => [1, 2]
       #response = RestClient.post "42.121.111.102/photos/query", :ids => [5403, 100]
       # response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb')
@@ -54,7 +54,7 @@ class ServiceTest
 
   def ServiceTest.video_query
     begin
-      response = RestClient.post "192.168.10.236:3000/videos/query", :ids => [1, 2, 1000]
+      response = RestClient.post "192.168.10.236:3000/videos/query", :ids => [3, 4, 1000]
       # response = RestClient.post "upload-test.vida.fm:15097/photos/add", :photo => File.new('1.png', 'rb'), :description => "hello world"
       #response = RestClient.post "localhost:3000/photos/add", :photo => File.new('1.png', 'rb')
       puts response
