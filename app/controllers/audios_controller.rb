@@ -5,6 +5,8 @@ class AudiosController < ApplicationController
 
       a = Audio.new(:duration => params[:audio_duration])
       a.save
+      a.filename = a.id.to_s
+      a.save
 
       audio_file_name = Audio.make_temp_file_name(a.id)
       File.open(audio_file_name, "wb+") do |f|

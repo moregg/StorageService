@@ -14,18 +14,27 @@ class Audio < ActiveRecord::Base
 
   def write_to_mogile_fs
      audio_file_name = Audio.make_temp_file_name(self.id)   
-     MogileFsUtil.put_to_fs(audio_file_name, self.id.to_s, MOGILEFS_CLASS_AUDIOS)
+     MogileFsUtil.put_to_fs(audio_file_name, "/" + self.id.to_s, MOGILEFS_CLASS_AUDIOS)
   end
 
   def Audio.query_to_json(id)
     result = {}
     begin
       a = Audio.find(id)
-      result.merge!({:audio_id => id, :duration => a.duration})
+      result.merge!({:audio_id => id, :duration => a.duration, :url => a.url})
     rescue ActiveRecord::RecordNotFound
       return nil
     end
 
     return result
   end
+
+  def url
+    if partition.blank?
+      "#{AUDIO_WEB}/#{filename}.m4a"
+    else
+      "#{AUDIO_WEB}/#{partition}/#{filename}.m4a"
+    end
+  end
+
 end

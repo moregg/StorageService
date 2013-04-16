@@ -4,6 +4,8 @@ class VideosController < ApplicationController
       video = params[:video]
       v = Video.new(:description => params[:description])
       v.save
+      v.dest_filename = v.id.to_s + ".mp4"
+      v.save
 
       (video_file_name,file_name_l,file_name_m,file_name_s) = Video.make_temp_file_name(v.id)
       File.open(video_file_name, "wb+") do |f|

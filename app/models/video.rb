@@ -9,7 +9,7 @@ class Video  < ActiveRecord::Base
       FileUtils.mkdir_p(video_path)
     end
 
-    video_file_name = video_path  + "/" + video_id.to_s
+    video_file_name = video_path  + "/" + video_id.to_s + ".mp4"
     video_file_name_l = video_file_name + "_l.jpg"
     video_file_name_m = video_file_name + "_m.jpg"
     video_file_name_s = video_file_name + "_s.jpg"
@@ -55,18 +55,42 @@ class Video  < ActiveRecord::Base
 
   def write_to_mogile_fs
     (video_file_name,file_name_l,file_name_m,file_name_s) = Video.make_temp_file_name(self.id)
-    MogileFsUtil.put_to_fs(video_file_name, self.id.to_s, MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_to_fs(file_name_l, self.id.to_s + "_l", MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_to_fs(file_name_m, self.id.to_s + "_m", MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_to_fs(file_name_s, self.id.to_s + "_s", MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_to_fs(video_file_name, "/" +self.id.to_s, MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_to_fs(file_name_l, "/" + self.id.to_s + "_l", MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_to_fs(file_name_m, "/" + self.id.to_s + "_m", MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_to_fs(file_name_s, "/" + self.id.to_s + "_s", MOGILEFS_CLASS_VIDEOS)
   end
 
+  def partition_file_name
+    if partition.blank?
+      return dest_filename
+    else
+      return partition + "/" + dest_filename
+    end
+  end
 
   def Video.query_to_json(id)
     result = {}
     begin
       v = Video.find(id)
-      result.merge!({:video_id => id, :description => v.description, :width => v.width, :height => v.height})
+      result.merge!({:video_id => id, :description => v.description, :url => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '.mp4'})
+
+      if v.playable?
+        result.merge!({
+                          :width => v.width,
+                          :height => v.height,
+                          :url_l => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '_l.jpg',
+                          :url_m => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '_m.jpg',
+                          :url_s => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '_s.jpg'})
+
+      else
+        result.merge!({
+                          :width => 640,
+                          :height => 640,
+                          :url_l => VIDEOS_PATH_WEB + '/video_processing.png',
+                          :url_m => VIDEOS_PATH_WEB + '/video_processing.png',
+                          :url_s => VIDEOS_PATH_WEB + '/video_processing.png'})
+      end
     rescue ActiveRecord::RecordNotFound
       return nil
     end

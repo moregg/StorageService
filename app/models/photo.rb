@@ -70,10 +70,10 @@ class Photo < ActiveRecord::Base
 
   def Photo.write_to_mogile_fs(photo_id)
     (photo_file_name,photo_file_name_l,photo_file_name_m,photo_file_name_s) = Photo.make_temp_file_name(photo_id)
-     MogileFsUtil.put_to_fs(photo_file_name, photo_id.to_s, MOGILEFS_CLASS_PICS)
-     MogileFsUtil.put_to_fs(photo_file_name_l, photo_id.to_s+"_l", MOGILEFS_CLASS_PICS)
-     MogileFsUtil.put_to_fs(photo_file_name_m, photo_id.to_s+"_m", MOGILEFS_CLASS_PICS)
-     MogileFsUtil.put_to_fs(photo_file_name_s, photo_id.to_s+"_s", MOGILEFS_CLASS_PICS)
+     MogileFsUtil.put_to_fs(photo_file_name, "/" + photo_id.to_s, MOGILEFS_CLASS_PICS)
+     MogileFsUtil.put_to_fs(photo_file_name_l, "/" + photo_id.to_s+"_l", MOGILEFS_CLASS_PICS)
+     MogileFsUtil.put_to_fs(photo_file_name_m, "/" + photo_id.to_s+"_m", MOGILEFS_CLASS_PICS)
+     MogileFsUtil.put_to_fs(photo_file_name_s, "/" + photo_id.to_s+"_s", MOGILEFS_CLASS_PICS)
   end
 
   def partition_file_name
