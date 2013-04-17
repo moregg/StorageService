@@ -29,7 +29,7 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -52,5 +52,5 @@ gem 'rb-readline'
 gem 'mini_magick', git: "git://github.com/Prajna/mini_magick.git"
 
 gem 'mogilefs-client', :require => "mogilefs"
-gem 'execjs'
-gem 'therubyracer'
+#gem 'execjs'
+#gem 'therubyracer'
