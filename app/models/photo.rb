@@ -6,6 +6,21 @@ class Photo < ActiveRecord::Base
   attr_accessible :validated, :isvalid, :del_flg
   attr_accessible :md5, :description, :partition
   # To change this template use File | Settings | File Templates.
+  def Photo.set_call_back(url)
+    @@call_back = url
+  end
+
+  def Photo.get_call_back
+    return @@call_back
+  end
+
+  def Photo.call_back(photo_id)
+    begin
+      RestClient.get Photo.get_call_back + "?id=" + photo_id.to_s
+    rescue Exception => e
+      ProcesserLog.log "photo call back error:" + e.message
+    end
+  end
 
   def Photo.make_temp_file_name(photo_id)
     date = Date.today

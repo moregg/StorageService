@@ -12,6 +12,7 @@ class PhotoProcesserJob
         Photo.add_afu(photo_id)
       end
       Photo.write_to_mogile_fs(photo_id)
+      Photo.call_back(photo_id)
     rescue Exception=>e
       ProcesserLog.log(e.message)
     end

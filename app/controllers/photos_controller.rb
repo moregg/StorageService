@@ -3,6 +3,7 @@ class PhotosController < ApplicationController
     begin
       photo = params[:photo]
       filter_info = params[:filter_info]
+      Photo.set_call_back(params[:callback_host])
 
       p = Photo.new(:description => params[:description])
       p.save

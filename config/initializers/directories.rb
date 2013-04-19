@@ -1,9 +1,3 @@
-AUDIOS_PATH = "#{Rails.root}/public/audios"
-
-AUDIO_WEB = "http://audio.vida.fm"
-
-VIDEOS_PATH_WEB = "http://video.vida.fm"
-
 MOGILEFS_HOSTS = %w[192.168.10.201:7001 192.168.10.202:7001]
 
 MOGILEFS_DOMAIN = "vidafm"
