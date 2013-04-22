@@ -91,8 +91,25 @@ class ServiceTest
       end
     end
 
-    def memcached_test
-      Rails.cache.write "a","b"
+    def memcached_test_set
+     h = {:user => "sbc", :password => "xxx"}
+     p = Photo.new
+     begin
+      Rails.cache.write 123, h
+      Rails.cache.write 234, p
+     rescue Exception => e
+      puts e.message
+     end
+    end
+    
+    def memcached_test_get
+       v = Rails.cache.read(123)
+       puts v.class
+       puts v
+      
+       p = Rails.cache.fetch(234)
+       puts p.class
+       puts p
     end
   end
 end
