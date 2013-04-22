@@ -29,7 +29,7 @@ class PhotosController < ApplicationController
     photo_ids = params[:ids]
     @photos = {}
     photo_ids.each do |photo_id|
-      @photos[photo_id.to_s] = Photo.query_to_json(photo_id)
+      @photos[photo_id.to_s] = Photo.query(photo_id)
     end
   end
 

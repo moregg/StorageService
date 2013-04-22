@@ -121,4 +121,9 @@ class Photo < ActiveRecord::Base
     return result
   end
 
+  def Photo.query(id)
+     Rails.cache.fetch(id) do
+       o = Photo.query_to_json(id)
+     end
+  end
 end
