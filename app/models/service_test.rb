@@ -97,6 +97,7 @@ class ServiceTest
      begin
       Rails.cache.write 123, h
       Rails.cache.write 234, p
+      Rails.cache.write 345, nil
      rescue Exception => e
       puts e.message
      end
@@ -110,6 +111,10 @@ class ServiceTest
        p = Rails.cache.fetch(234)
        puts p.class
        puts p
+   
+       n = Rails.cache.fetch(345)
+       puts n.class
+       puts n
     end
   end
 end
