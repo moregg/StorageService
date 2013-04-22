@@ -26,7 +26,7 @@ class VideosController < ApplicationController
     video_ids = params[:ids]
     @videos = []
     video_ids.each do |video_id|
-      @videos.push(Video.query_to_json(video_id))
+      @videos.push(Video.query(video_id))
     end
   end
 end

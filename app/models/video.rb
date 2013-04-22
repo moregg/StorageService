@@ -97,4 +97,14 @@ class Video  < ActiveRecord::Base
 
     return result
   end
+  
+  def Video.query(id)
+     cache_id = "video_" + id.to_s
+     v = Rails.cache.fetch(cache_id)
+     if v == nil
+       v = Video.query_to_json(id)
+       Rails.cache.write cache_id, v
+     end
+     return v
+  end
 end

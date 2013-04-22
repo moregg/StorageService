@@ -37,4 +37,15 @@ class Audio < ActiveRecord::Base
     end
   end
 
+  def Audio.query(id)
+     cache_id = "audio_" + id.to_s
+     a = Rails.cache.fetch(cache_id)
+     if a == nil
+       a = Audio.query_to_json(id)
+       Rails.cache.write cache_id, a
+     end
+     return a
+  end
+
 end
+

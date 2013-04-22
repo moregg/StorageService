@@ -27,7 +27,7 @@ class AudiosController < ApplicationController
     audios_ids = params[:ids]
     @audios = []
     audios_ids.each do |audio_id|
-      @audios.push(Audio.query_to_json(audio_id))
+      @audios.push(Audio.query(audio_id))
     end
   end
 
