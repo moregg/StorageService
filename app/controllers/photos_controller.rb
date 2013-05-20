@@ -27,10 +27,8 @@ class PhotosController < ApplicationController
 
   def query
     photo_ids = params[:ids]
-    @photos = {}
-    photo_ids.each do |photo_id|
-      @photos[photo_id.to_s] = Photo.query(photo_id)
-    end
+    photo_jsons = Photo.query_multi(photo_ids)
+    render :json => photo_jsons
   end
 
 

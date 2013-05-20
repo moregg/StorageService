@@ -99,36 +99,72 @@ class Photo < ActiveRecord::Base
     end
   end
 
-  def Photo.query_to_json(id)
+=begin
+  def query_to_json()
     result = {}
-    begin
-      p = Photo.find(id)
-      result.merge!({:origin => {:photo_id => id, :description => p.description}})
+    result.merge!({:origin => {:photo_id => self.id, :description => self.description}})
 
-      Photo.where("parent_id = ? ", id).each do |p|
-        if p.thumbnail == "l"
-           result.merge!({:l => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name }})
-        elsif p.thumbnail == "m"
-           result.merge!({:m => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
-        elsif p.thumbnail == "s"
-           result.merge!({:s => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
-        end
+    Photo.where("parent_id = ? ", self.id).each do |p|
+      if p.thumbnail == "l"
+        result.merge!({:l => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
+      elsif p.thumbnail == "m"
+        result.merge!({:m => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
+      elsif p.thumbnail == "s"
+        result.merge!({:s => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
       end
-    rescue ActiveRecord::RecordNotFound
-      return nil
+    end
+
+    return result
+  end
+=end
+
+  def Photo.query_to_json(photo,photo_thumbnails)
+    result = {}
+    result.merge!({:origin => {:photo_id => photo.id, :description => photo.description}})
+
+    photo_thumbnails.each do |p|
+      if p.thumbnail == "l"
+        result.merge!({:l => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
+      elsif p.thumbnail == "m"
+        result.merge!({:m => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
+      elsif p.thumbnail == "s"
+        result.merge!({:s => {:width => p.width, :height => p.height, :url => PICS_PATH_WEB + "/" + p.partition_file_name}})
+      end
     end
 
     return result
   end
 
-  def Photo.query(id)
-     cache_id = "photo_" + id.to_s
-     p = Rails.cache.fetch(cache_id)
-     if p == nil
-       p = Photo.query_to_json(id)
-       Rails.cache.write cache_id, p
+  def Photo.cache_key(id)
+     "photo_" + id.to_s
+  end
+
+  def cache_key
+    "photo_" + self.id.to_s
+  end
+
+  #为了最大程度提高性能，1.从Cache中一次性捞出read_multi  2. 剩下的，从数据库中一次捞出，只调用2次sql查询：一次捞出全部photos, 另一次捞出全部photo_thumnails
+  def Photo.query_multi(ids)
+     cache_ids = ids.collect{|id| Photo.cache_key(id)}
+     result = Rails.cache.read_multi(*cache_ids)
+
+     remaining_ids = []
+     ids.each do |id|
+       remaining_ids << id  if result[Photo.cache_key(id)] == nil
      end
-     return p
+
+     if remaining_ids.size() > 0
+       db_photos = Photo.where(id: remaining_ids)
+       db_photo_thumbnails = Photo.where(parent_id: remaining_ids).group_by(&:parent_id)
+
+       db_photos.each do |photo|
+         photo_json = Photo.query_to_json(photo,db_photo_thumbnails[photo.id])
+         result[Photo.cache_key(photo.id)] = photo_json
+         Rails.cache.write Photo.cache_key(photo.id), photo_json
+       end
+     end
+
+     return result
   end
 
 end
