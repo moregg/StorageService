@@ -24,7 +24,7 @@ class AudiosController < ApplicationController
   end
 
   def query
-    audios_ids = params[:ids]
+    audio_ids = params[:ids]
     audio_jsons = Audio.query_multi(audio_ids)
     render :json => audio_jsons
   end
