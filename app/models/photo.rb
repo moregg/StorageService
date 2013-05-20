@@ -102,7 +102,7 @@ class Photo < ActiveRecord::Base
 =begin
   def query_to_json()
     result = {}
-    result.merge!({:origin => {:photo_id => self.id, :description => self.description}})
+    result.merge!({:origin => {:id => self.id, :description => self.description}})
 
     Photo.where("parent_id = ? ", self.id).each do |p|
       if p.thumbnail == "l"
@@ -120,7 +120,9 @@ class Photo < ActiveRecord::Base
 
   def Photo.query_to_json(photo,photo_thumbnails)
     result = {}
-    result.merge!({:origin => {:photo_id => photo.id, :description => photo.description}})
+    result.merge!({:origin => {:id => photo.id, :description => photo.description}})
+
+    return result if photo_thumbnails == nil
 
     photo_thumbnails.each do |p|
       if p.thumbnail == "l"
