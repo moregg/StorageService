@@ -17,16 +17,8 @@ class Audio < ActiveRecord::Base
      MogileFsUtil.put_to_fs(audio_file_name, "/" + self.id.to_s, MOGILEFS_CLASS_AUDIOS)
   end
 
-  def Audio.query_to_json(id)
-    result = {}
-    begin
-      a = Audio.find(id)
-      result.merge!({:audio_id => id, :duration => a.duration, :url => a.url})
-    rescue ActiveRecord::RecordNotFound
-      return nil
-    end
-
-    return result
+  def query_to_json
+    result = {:id => self.id, :duration => self.duration, :url => self.url}
   end
 
   def url
@@ -37,14 +29,33 @@ class Audio < ActiveRecord::Base
     end
   end
 
-  def Audio.query(id)
-     cache_id = "audio_" + id.to_s
-     a = Rails.cache.fetch(cache_id)
-     if a == nil
-       a = Audio.query_to_json(id)
-       Rails.cache.write cache_id, a
-     end
-     return a
+  def Audio.cache_key(id)
+    "audio_" + id.to_s
+  end
+
+  def cache_key
+    "audio_" + self.id.to_s
+  end
+
+  def Audio.query_multi(ids)
+    cache_ids = ids.collect{|id| Audio.cache_key(id)}
+    result = Rails.cache.read_multi(*cache_ids)
+
+    remaining_ids = []
+    ids.each do |id|
+      remaining_ids << id  if result[Audio.cache_key(id)] == nil
+    end
+
+    if remaining_ids.size() > 0
+      db_audios = Audio.where(id: remaining_ids)
+      db_audios.each do |audio|
+        audio_json = audio.query_to_json
+        result[Audio.cache_key(audio.id)] = audio_json
+        Rails.cache.write Audio.cache_key(audio.id),audio_json
+      end
+    end
+
+    return result
   end
 
 end

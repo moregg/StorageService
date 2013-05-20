@@ -69,42 +69,57 @@ class Video  < ActiveRecord::Base
     end
   end
 
-  def Video.query_to_json(id)
+  def query_to_json()
     result = {}
-    begin
-      v = Video.find(id)
-      result.merge!({:video_id => id, :description => v.description, :url => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '.mp4'})
+    result.merge!({:id => self.id, :description => self.description, :url => VIDEOS_PATH_WEB + '/' + self.partition_file_name + '.mp4'})
 
-      if v.playable?
-        result.merge!({
-                          :width => v.width,
-                          :height => v.height,
-                          :url_l => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '_l.jpg',
-                          :url_m => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '_m.jpg',
-                          :url_s => VIDEOS_PATH_WEB + '/' + v.partition_file_name + '_s.jpg'})
+    if self.playable?
+      result.merge!({
+                        :width => self.width,
+                        :height => self.height,
+                        :url_l => VIDEOS_PATH_WEB + '/' + self.partition_file_name + '_l.jpg',
+                        :url_m => VIDEOS_PATH_WEB + '/' + self.partition_file_name + '_m.jpg',
+                        :url_s => VIDEOS_PATH_WEB + '/' + self.partition_file_name + '_s.jpg'})
 
-      else
-        result.merge!({
-                          :width => 640,
-                          :height => 640,
-                          :url_l => VIDEOS_PATH_WEB + '/video_processing.png',
-                          :url_m => VIDEOS_PATH_WEB + '/video_processing.png',
-                          :url_s => VIDEOS_PATH_WEB + '/video_processing.png'})
-      end
-    rescue ActiveRecord::RecordNotFound
-      return nil
+    else
+      result.merge!({
+                        :width => 640,
+                        :height => 640,
+                        :url_l => VIDEOS_PATH_WEB + '/video_processing.png',
+                        :url_m => VIDEOS_PATH_WEB + '/video_processing.png',
+                        :url_s => VIDEOS_PATH_WEB + '/video_processing.png'})
     end
+
 
     return result
   end
-  
-  def Video.query(id)
-     cache_id = "video_" + id.to_s
-     v = Rails.cache.fetch(cache_id)
-     if v == nil
-       v = Video.query_to_json(id)
-       Rails.cache.write cache_id, v
-     end
-     return v
+
+  def Video.cache_key(id)
+    "video_" + id.to_s
+  end
+
+  def cache_key
+    "video_" + self.id.to_s
+  end
+
+  def Video.query_multi(ids)
+    cache_ids = ids.collect{|id| Video.cache_key(id)}
+    result = Rails.cache.read_multi(*cache_ids)
+
+    remaining_ids = []
+    ids.each do |id|
+      remaining_ids << id  if result[Video.cache_key(id)] == nil
+    end
+
+    if remaining_ids.size() > 0
+      db_videos = Video.where(id: remaining_ids)
+      db_videos.each do |video|
+        video_json = video.query_to_json
+        result[Video.cache_key(video.id)] = video_json
+        Rails.cache.write Video.cache_key(video.id),video_json
+      end
+    end
+
+    return result
   end
 end

@@ -24,9 +24,9 @@ class VideosController < ApplicationController
 
   def query
     video_ids = params[:ids]
-    @videos = []
-    video_ids.each do |video_id|
-      @videos.push(Video.query(video_id))
-    end
+    video_jsons = Video.query_multi(video_ids)
+    render :json => video_jsons
   end
+
+
 end

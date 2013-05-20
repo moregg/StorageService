@@ -25,10 +25,8 @@ class AudiosController < ApplicationController
 
   def query
     audios_ids = params[:ids]
-    @audios = []
-    audios_ids.each do |audio_id|
-      @audios.push(Audio.query(audio_id))
-    end
+    audio_jsons = Audio.query_multi(audio_ids)
+    render :json => audio_jsons
   end
 
 end
