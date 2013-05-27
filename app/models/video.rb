@@ -71,7 +71,7 @@ class Video  < ActiveRecord::Base
 
   def query_to_json()
     result = {}
-    result.merge!({:id => self.id, :description => self.description, :url => VIDEOS_PATH_WEB + '/' + self.partition_file_name + '.mp4'})
+    result.merge!({:id => self.id, :description => self.description, :url => VIDEOS_PATH_WEB + '/' + self.partition_file_name + '.mp4', :playable => self.playable?})
 
     if self.playable?
       result.merge!({
