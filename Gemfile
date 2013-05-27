@@ -55,3 +55,4 @@ gem 'mogilefs-client', :require => "mogilefs"
 #gem 'execjs'
 #gem 'therubyracer'
 gem 'memcache-client'
+gem 'redis-rails'
