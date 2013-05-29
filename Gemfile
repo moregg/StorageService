@@ -29,7 +29,7 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -56,3 +56,5 @@ gem 'mogilefs-client', :require => "mogilefs"
 #gem 'therubyracer'
 gem 'memcache-client'
 gem 'redis-rails'
+
+gem 'uuidtools'

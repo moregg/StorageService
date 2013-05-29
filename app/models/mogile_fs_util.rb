@@ -6,7 +6,9 @@ class MogileFsUtil
       rescue Exception=>e
         MogileFsErrorLog.log e.message
         MogileFsErrorLog.log "the file is :" + src_file_path
+        return false
       end
+      return true
   end
 
   def MogileFsUtil.get_from_fs(mg_key, mg_class, mg_domain = MOGILEFS_DOMAIN)
