@@ -6,7 +6,7 @@ class MogileFsUtil
         @@filestore.store_file(mg_key, mg_class, src_file_path)
       rescue Exception=>e
         MogileFsErrorLog.log e.message
-        MogileFsErrorLog.log "the file is :" + src_file_path
+        MogileFsErrorLog.log "put_file_to_fs_error:" + src_file_path
         return false
       end
       return true
@@ -18,7 +18,7 @@ class MogileFsUtil
         @@filestore.store_content(mg_key, mg_class, content)
       rescue Exception=>e
         MogileFsErrorLog.log e.message
-        MogileFsErrorLog.log "the file is :" + src_file_path
+        MogileFsErrorLog.log "put_content_to_fs_error:" + mg_key
         return false
       end
       return true

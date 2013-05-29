@@ -24,7 +24,7 @@ class Photo < ActiveRecord::Base
 
   def Photo.make_temp_file_name(photo_id)
     date = Date.today
-    photo_path = Rails.root.to_s + "/public/photos/" +  date.year.to_s + "_" + date.month.to_s + "_" + date.day.to_s
+    photo_path = Rails.root.to_s + "/public/photos"
     if !FileTest.exists?(photo_path)
       FileUtils.mkdir_p(photo_path)
     end

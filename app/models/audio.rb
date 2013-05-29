@@ -3,7 +3,7 @@ class Audio < ActiveRecord::Base
 
   def Audio.make_temp_file_name(audio_id)
     date = Date.today
-    audio_path = Rails.root.to_s + "/public/audios/" +  date.year.to_s + "_" + date.month.to_s + "_" + date.day.to_s
+    audio_path = Rails.root.to_s + "/public/audios"
     if !FileTest.exists?(audio_path)
       FileUtils.mkdir_p(audio_path)
     end

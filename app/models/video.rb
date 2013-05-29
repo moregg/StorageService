@@ -4,7 +4,7 @@ class Video  < ActiveRecord::Base
 
   def Video.make_temp_file_name(video_id)
     date = Date.today
-    video_path = Rails.root.to_s + "/public/videos/" +  date.year.to_s + "_" + date.month.to_s + "_" + date.day.to_s
+    video_path = Rails.root.to_s + "/public/videos"
     if !FileTest.exists?(video_path)
       FileUtils.mkdir_p(video_path)
     end
