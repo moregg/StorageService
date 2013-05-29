@@ -5,13 +5,17 @@ class ImagesController < ApplicationController
 
     key = UUIDTools::UUID.timestamp_create.to_s
 
-    if filter_info != nil && filter_info["180X180>"] == true
-      img = MiniMagick::Image.open(image)
+    if filter_info == "180X180>"
+      img = MiniMagick::Image.read(image)
       img.resize "180X180>"
-      image = img
+
+      image = img.to_blob
+      result= MogileFsUtil.put_content_to_fs(image, "/" + key, MOGILEFS_CLASS_PICS)
+    else
+      result= MogileFsUtil.put_to_fs(image, "/" + key, MOGILEFS_CLASS_PICS)
     end
 
-    if MogileFsUtil.put_to_fs(image, "/" + key, MOGILEFS_CLASS_PICS)
+    if result 
       render :json=>{:key => key}
     else
       render :json=>{:key => nil}

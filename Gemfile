@@ -48,7 +48,8 @@ gem  'eventmachine'
 gem 'thin'
 
 gem 'log4r'
-gem 'rb-readline'
+#gem 'rb-readline'
+gem 'rb-readline', '~> 0.4.2'
 gem 'mini_magick', git: "git://github.com/Prajna/mini_magick.git"
 
 gem 'mogilefs-client', :require => "mogilefs"
