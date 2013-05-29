@@ -85,10 +85,18 @@ class Photo < ActiveRecord::Base
 
   def Photo.write_to_mogile_fs(photo_id)
     (photo_file_name,photo_file_name_l,photo_file_name_m,photo_file_name_s) = Photo.make_temp_file_name(photo_id)
-     system "rm -f #{photo_file_name}" unless MogileFsUtil.put_file_to_fs(photo_file_name, "/" + photo_id.to_s, MOGILEFS_CLASS_PICS)
-     system "rm -f #{photo_file_name_l}" unless MogileFsUtil.put_file_to_fs(photo_file_name_l, "/" + photo_id.to_s + "_l", MOGILEFS_CLASS_PICS)
-     system "rm -f #{photo_file_name_m}" unless MogileFsUtil.put_file_to_fs(photo_file_name_m, "/" + photo_id.to_s + "_m", MOGILEFS_CLASS_PICS)
-     system "rm -f #{photo_file_name_s}" unless MogileFsUtil.put_file_to_fs(photo_file_name_s, "/" + photo_id.to_s + "_s", MOGILEFS_CLASS_PICS)
+    if MogileFsUtil.put_file_to_fs(photo_file_name, "/" + photo_id.to_s, MOGILEFS_CLASS_PICS)
+      `rm -f #{photo_file_name}`
+    end
+    if MogileFsUtil.put_file_to_fs(photo_file_name_l, "/" + photo_id.to_s + "_l", MOGILEFS_CLASS_PICS)
+      `rm -f #{photo_file_name_l}`
+    end
+    if MogileFsUtil.put_file_to_fs(photo_file_name_m, "/" + photo_id.to_s + "_m", MOGILEFS_CLASS_PICS)
+      `rm -f #{photo_file_name_m}`
+    end
+    if MogileFsUtil.put_file_to_fs(photo_file_name_s, "/" + photo_id.to_s + "_s", MOGILEFS_CLASS_PICS)
+      `rm -f #{photo_file_name_s}`
+    end
   end
 
   def partition_file_name
