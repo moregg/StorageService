@@ -12,7 +12,7 @@ class ImagesController < ApplicationController
       image = img.to_blob
       result= MogileFsUtil.put_content_to_fs(image, "/" + key, MOGILEFS_CLASS_PICS)
     else
-      result= MogileFsUtil.put_to_fs(image, "/" + key, MOGILEFS_CLASS_PICS)
+      result= MogileFsUtil.put_file_to_fs(image, "/" + key, MOGILEFS_CLASS_PICS)
     end
 
     if result 

@@ -1,5 +1,5 @@
 class MogileFsUtil
-  def MogileFsUtil.put_to_fs(src_file_path, mg_key, mg_class, mg_domain = MOGILEFS_DOMAIN)
+  def MogileFsUtil.put_file_to_fs(src_file_path, mg_key, mg_class, mg_domain = MOGILEFS_DOMAIN)
       begin
         filestore = MogileFS::MogileFS.new(:domain => mg_domain, :hosts => MOGILEFS_HOSTS)
         filestore.store_file(mg_key, mg_class, src_file_path)
@@ -24,14 +24,12 @@ class MogileFsUtil
       return true
   end
 
-  def MogileFsUtil.get_from_fs(mg_key, mg_class, mg_domain = MOGILEFS_DOMAIN)
+  def MogileFsUtil.get_data_from_fs(mg_key, mg_class, mg_domain = MOGILEFS_DOMAIN)
     begin
      # path = TEMP_PATH + '/' + UUIDTools::UUID.timestamp_create().to_s
       filestore = MogileFS::MogileFS.new(:domain => mg_domain, :hosts => MOGILEFS_HOSTS)
       data = filestore.get_file_data(mg_key)
-      File.open("abc", 'wb') do |f|
-        f.write(data)
-      end
+      return data
     rescue Exception=>e
       puts e.message 
     end

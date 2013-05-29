@@ -14,7 +14,7 @@ class Audio < ActiveRecord::Base
 
   def write_to_mogile_fs
      audio_file_name = Audio.make_temp_file_name(self.id)   
-     MogileFsUtil.put_to_fs(audio_file_name, "/" + self.id.to_s, MOGILEFS_CLASS_AUDIOS)
+     MogileFsUtil.put_file_to_fs(audio_file_name, "/" + self.id.to_s, MOGILEFS_CLASS_AUDIOS)
   end
 
   def query_to_json

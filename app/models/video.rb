@@ -22,15 +22,12 @@ class Video  < ActiveRecord::Base
 
     thumb_large_str = "ffmpeg -y -i " + video_file_name + " -vframes 1 -ss 1  #{file_name_l}"
     system thumb_large_str
-    #File::put_to_fs(File.open("#{TEMP_PATH}/#{self.dest_filename}_l.jpg", "r"), "#{self.partitioned_filename}_l.jpg", MOGILEFS_CLASS_VIDEOS)
 
     thumb_middle_str = "ffmpeg -y -i " + video_file_name + " -vframes 1 -ss 1 #{file_name_m}"
     system thumb_middle_str
-    #File::put_to_fs(File.open("#{TEMP_PATH}/#{self.dest_filename}_m.jpg", "r"), "#{self.partitioned_filename}_m.jpg", MOGILEFS_CLASS_VIDEOS)
 
     thumb_small_str = "ffmpeg -y -i " + video_file_name + " -vframes 1 -ss 1 #{file_name_s}"
     system thumb_small_str
-    #File::put_to_fs(File.open("#{TEMP_PATH}/#{self.dest_filename}_s.jpg", "r"), "#{self.partitioned_filename}_s.jpg", MOGILEFS_CLASS_VIDEOS)
 
     self.transcoded = 1
     self.isvalid = 1
@@ -55,10 +52,10 @@ class Video  < ActiveRecord::Base
 
   def write_to_mogile_fs
     (video_file_name,file_name_l,file_name_m,file_name_s) = Video.make_temp_file_name(self.id)
-    MogileFsUtil.put_to_fs(video_file_name, "/" +self.id.to_s, MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_to_fs(file_name_l, "/" + self.id.to_s + "_l", MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_to_fs(file_name_m, "/" + self.id.to_s + "_m", MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_to_fs(file_name_s, "/" + self.id.to_s + "_s", MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_file_to_fs(video_file_name, "/" +self.id.to_s, MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_file_to_fs(file_name_l, "/" + self.id.to_s + "_l", MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_file_to_fs(file_name_m, "/" + self.id.to_s + "_m", MOGILEFS_CLASS_VIDEOS)
+    MogileFsUtil.put_file_to_fs(file_name_s, "/" + self.id.to_s + "_s", MOGILEFS_CLASS_VIDEOS)
   end
 
   def partition_file_name
