@@ -52,10 +52,10 @@ class Video  < ActiveRecord::Base
 
   def write_to_mogile_fs
     (video_file_name,file_name_l,file_name_m,file_name_s) = Video.make_temp_file_name(self.id)
-    MogileFsUtil.put_file_to_fs(video_file_name, "/" +self.id.to_s, MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_file_to_fs(file_name_l, "/" + self.id.to_s + "_l", MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_file_to_fs(file_name_m, "/" + self.id.to_s + "_m", MOGILEFS_CLASS_VIDEOS)
-    MogileFsUtil.put_file_to_fs(file_name_s, "/" + self.id.to_s + "_s", MOGILEFS_CLASS_VIDEOS)
+    system "rm -f #{video_file_name}" unless MogileFsUtil.put_file_to_fs(video_file_name, "/" +self.id.to_s, MOGILEFS_CLASS_VIDEOS)
+    system "rm -f #{file_name_l}" unless MogileFsUtil.put_file_to_fs(file_name_l, "/" + self.id.to_s + "_l", MOGILEFS_CLASS_VIDEOS)
+    system "rm -f #{file_name_m}" unless MogileFsUtil.put_file_to_fs(file_name_m, "/" + self.id.to_s + "_m", MOGILEFS_CLASS_VIDEOS)
+    system "rm -f #{file_name_s}" unless MogileFsUtil.put_file_to_fs(file_name_s, "/" + self.id.to_s + "_s", MOGILEFS_CLASS_VIDEOS)
   end
 
   def partition_file_name
