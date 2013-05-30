@@ -1,6 +1,6 @@
 class PhotoProcesserJob
   # To change this template use File | Settings | File Templates.
-  @queue = :photo_processer
+  @queue = :storage_service_queue
 
   def self.perform(photo_id, filter_info)
     ProcesserLog.log("begin processing photo.........#{photo_id}....#{filter_info}")

@@ -5,4 +5,4 @@
 sleep 5
 ./unicorn start
 kill -9 $(cat ./resque.pid)
-RAILS_ENV=production rake resque:work QUEUE=* BACKGROUND=yes PIDFILE=./resque.pid
+RAILS_ENV=production rake resque:work QUEUE=storage_service_queue BACKGROUND=yes PIDFILE=./resque.pid
