@@ -59,3 +59,4 @@ gem 'memcache-client'
 gem 'redis-rails'
 
 gem 'uuidtools'
+gem 'rack', '1.4.1'
